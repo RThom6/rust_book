@@ -17,6 +17,8 @@ fn main() {
     println!("{x}");
 
     data_types(5);
+
+    _ownership();
 }
 
 fn data_types(_value: i32) {
@@ -47,9 +49,50 @@ fn data_types(_value: i32) {
 
     // Function implicitly returns last expression, or can use 'return x;'
 
-    // For loop 12 -> 1: .rev() reverses the range
-    for number in (1..12).rev() {
-        println!("{number}");
+    // For loop 12 -> 1: .rev() reverses the range, range not inclusive of 12?
+    for number in (1..=12).rev() {
+        println!("range: {number}");
     }
 
+}
+
+// '_' at start of identity means it is able to remain unused
+fn _ownership() {
+    let mut s = String::from("Hello"); // String type
+    let mut _a = "test"; // &str type
+
+    // _a.push_str(", world"); not possible as str not String
+    s.push_str(", World!"); // Appends to the string
+
+    let string = String::from("testing");
+    println!("{string}");
+
+    some_string(string);
+    // After this due to move, if we tried printing string, it wouldnt compile
+
+    // Cannot modify variable that is being borrowed by default, would need &mut Type instead
+    let s = String::from("magic");
+    some_reference(&s);
+    println!("{s}");
+    // Cannot have multiple references if a value has a mutable reference
+
+    let slice = String::from("sliced");
+    let slice = string_slicing(&slice);
+    println!("{slice}");
+}
+
+// This function takes ownership of any input string
+fn some_string(string: String) {
+    println!("{string}");
+}
+
+// This function uses a reference instead of taking ownership
+fn some_reference(s: &String) {
+    println!("{s}");
+}
+
+// &str allows for String or str slices
+fn string_slicing(s: &str) -> &str {
+    println!("{s}");
+    &s
 }
