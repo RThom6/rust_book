@@ -1,3 +1,10 @@
+// struct User {
+    // active: bool,
+    // username: String,
+    // email: String,
+    // age: u8,
+// }
+
 fn main() {
     println!("Hello, world!");
 
@@ -19,6 +26,14 @@ fn main() {
     data_types(5);
 
     _ownership();
+
+    // Using a struct
+    // let _user1 = User {
+    //     active: true,
+    //     username: String::from("Dave"),
+    //     email: String::from("davemail@gmail.com"),
+    //     age: 20,
+    // }; // If using params, can use shorthand and not inclue "email:" just the var
 }
 
 fn data_types(_value: i32) {
@@ -72,6 +87,7 @@ fn _ownership() {
 
     // Cannot modify variable that is being borrowed by default, would need &mut Type instead
     let s = String::from("magic");
+    
     some_reference(&s);
     println!("{s}");
     // Cannot have multiple references if a value has a mutable reference
@@ -96,3 +112,5 @@ fn string_slicing(s: &str) -> &str {
     println!("{s}");
     &s
 }
+
+// Defining a struct
